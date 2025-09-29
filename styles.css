@@ -1192,3 +1192,9 @@ body.white-bg {
 .still-item img[loading="lazy"].loaded {
     opacity: 1;
 }
+@media (max-width: 768px) {
+    .stills-grid .still-item img {
+        height: auto;
+        width: 100%;
+    }
+}
