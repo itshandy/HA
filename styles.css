@@ -810,6 +810,7 @@ body.white-bg {
 }
 
 .still-item img {
+    /* THIS IS THE KEY FIX */
     width: 100%;
     height: auto;
     display: block;
@@ -1191,10 +1192,4 @@ body.white-bg {
 
 .still-item img[loading="lazy"].loaded {
     opacity: 1;
-}
-@media (max-width: 768px) {
-    .stills-grid .still-item img {
-        height: auto;
-        width: 100%;
-    }
 }
