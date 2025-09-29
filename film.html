@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="filmTitle">Film - Harnish Ambaliya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="white-bg film-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+    <span class="logo-name">Harnish Ambaliya</span> 
+    | 
+    <span class="logo-title">Director of Photography</span>
+</a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">All Work</a></li>
+                <li><a href="index.html#feature" class="nav-link">Feature Films</a></li>
+                <li><a href="index.html#tv" class="nav-link">TV Pilots</a></li>
+                <li><a href="index.html#short" class="nav-link">Short Films</a></li>
+                <li><a href="index.html#commercial" class="nav-link">MV/Commercials</a></li>
+                <li><a href="about.html" class="nav-link">About Me</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="film-main">
+        <section class="film-hero">
+            <div class="film-container">
+                <div class="film-title-section">
+                    <h1 id="filmName" class="film-title">Loading...</h1>
+                    <div class="film-meta" id="filmMeta">
+                        <span id="filmType">Type</span>
+                        <span class="meta-separator">•</span>
+                        <span id="filmYear">Year</span>
+                        <span class="meta-separator">•</span>
+                        <span id="filmDuration">Duration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="film-video-section" id="videoSection">
+            <div class="film-container">
+                <div class="video-wrapper">
+                    <div class="video-container" id="videoContainer">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="film-stills-section">
+            <div class="film-container">
+                <div class="stills-header">
+                    <h2 class="section-title">Stills</h2>
+                </div>
+                <div class="stills-grid" id="filmStills">
+                    </div>
+            </div>
+        </section>
+
+        <section class="film-details-section">
+            <div class="film-container">
+                <div class="film-details-grid">
+                    <div class="film-description">
+                        <div class="detail-block">
+                            <h2 class="detail-title">Credits</h2>
+                            <div class="detail-list" id="filmCredits">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="imageModal" class="image-modal">
+        <div class="modal-backdrop">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-content">
+                <img id="modalImage" src="" alt="Full size image">
+                <div class="modal-nav">
+                    <button id="modalPrev" class="modal-nav-btn">‹</button>
+                    <button id="modalNext" class="modal-nav-btn">›</button>
+                </div>
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Harnish Ambaliya. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Film page functionality - supports YouTube, Vimeo, or no video
+        let currentImageIndex = 0;
+        let currentImages = [];
+
+        function getFilmIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        function getFilmData(filmId) {
+            if (window.FILM_DATA && window.FILM_DATA[filmId]) {
+                return window.FILM_DATA[filmId];
+            }
+            return null;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filmId = getFilmIdFromURL();
+            
+            if (!filmId) {
+                console.error('No film ID in URL');
+                displayError();
+                return;
+            }
+
+            const filmData = getFilmData(filmId);
+            
+            if (!filmData) {
+                console.error('Film not found:', filmId);
+                displayError();
+                return;
+            }
+
+            updateFilmPage(filmData);
+            initializeImageModal();
+        });
+
+        function displayError() {
+            document.getElementById('filmName').textContent = 'Film Not Found';
+            document.getElementById('filmType').textContent = 'Error';
+            document.getElementById('filmYear').textContent = '';
+            document.getElementById('filmDuration').textContent = '';
+            document.getElementById('filmCredits').innerHTML = '<div>Unable to load film data. <a href="index.html">Return to portfolio</a></div>';
+            document.getElementById('videoSection').style.display = 'none';
+        }
+
+        function updateFilmPage(filmData) {
+            // Update page title and header
+            document.getElementById('filmTitle').textContent = `${filmData.title} - Harnish Ambaliya`;
+            document.getElementById('filmName').textContent = filmData.title;
+            document.getElementById('filmType').textContent = filmData.type || 'Film';
+            document.getElementById('filmYear').textContent = filmData.year || '2024';
+            document.getElementById('filmDuration').textContent = filmData.duration || 'N/A';
+            
+            // Update video (YouTube, Vimeo, or none)
+            updateVideo(filmData);
+            
+            // Update credits
+            updateCredits(filmData.credits);
+            
+            // Update stills
+            updateStills(filmData.stills || []);
+        }
+
+        function updateVideo(filmData) {
+            const videoSection = document.getElementById('videoSection');
+            const videoContainer = document.getElementById('videoContainer');
+            
+            // Check if there's a YouTube video
+            if (filmData.youtubeId && filmData.youtubeId !== 'YOUR_YOUTUBE_ID') {
+                videoContainer.innerHTML = `
+                    <iframe 
+                        src="https://www.youtube.com/embed/${filmData.youtubeId}?rel=0&modestbranding=1&showinfo=0" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen 
+                        title="${filmData.title} - Video">
+                    </iframe>
+                `;
+                videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
+                videoSection.style.display = 'block';
+            }
+           // Check if there's a Vimeo video
+else if (filmData.vimeoId) {
+    videoContainer.innerHTML = `
+        <iframe 
+            src="https://player.vimeo.com/video/${filmData.vimeoId}?byline=0&portrait=0" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            allowfullscreen
+            title="${filmData.title} - Video">
+        </iframe>
+    `;
+    videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
+    videoSection.style.display = 'block';
+}
+// Check for a full Vimeo embed URL
+else if (filmData.vimeoEmbedUrl) {
+    videoContainer.innerHTML = `
+        <iframe 
+            src="${filmData.vimeoEmbedUrl}" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            allowfullscreen
+            title="${filmData.title} - Video">
+        </iframe>
+    `;
+    videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
+    videoSection.style.display = 'block';
+}
+            // Check if there's a featured still image
+            else if (filmData.stills && filmData.stills.length > 0) {
+                const featuredImageSrc = filmData.stills[0];
+                const img = new Image();
+                img.src = featuredImageSrc;
+
+                img.onload = function() {
+                    videoContainer.style.aspectRatio = `${this.width} / ${this.height}`;
+
+                    videoContainer.innerHTML = `
+                        <img 
+                            src="${featuredImageSrc}" 
+                            alt="${filmData.title} - Featured Still" 
+                            style="width: 100%; height: 100%; object-fit: contain; cursor: pointer;"
+                            onclick="openImageModal(['${featuredImageSrc}'], 0)"
+                        >
+                    `;
+                    videoSection.style.display = 'block';
+                };
+
+                img.onerror = function() {
+                    console.error('Failed to load featured image:', featuredImageSrc);
+                    videoSection.style.display = 'none';
+                };
+            }
+            // No video and no stills - hide section
+            else {
+                videoSection.style.display = 'none';
+            }
+        }
+
+        function updateCredits(credits) {
+            const creditsContainer = document.getElementById('filmCredits');
+            creditsContainer.innerHTML = '';
+            
+            if (credits && Object.keys(credits).length > 0) {
+                Object.entries(credits).forEach(([role, name]) => {
+                    const creditItem = document.createElement('div');
+                    creditItem.innerHTML = `<strong>${role}:</strong> ${name}`;
+                    creditsContainer.appendChild(creditItem);
+                });
+            } else {
+                creditsContainer.innerHTML = '<div>Credits information not available</div>';
+            }
+        }
+
+        function updateStills(stills) {
+            const stillsContainer = document.getElementById('filmStills');
+            stillsContainer.innerHTML = '';
+            
+            // Get filmData to check if it has video
+            const filmId = getFilmIdFromURL();
+            const filmData = getFilmData(filmId);
+            
+            // If no video, skip the first image (it's shown as featured)
+            const hasVideo = (filmData.youtubeId && filmData.youtubeId !== 'YOUR_YOUTUBE_ID') || filmData.vimeoId;
+            const stillsToShow = hasVideo ? stills : stills.slice(1);
+            
+            if (stillsToShow.length === 0) {
+                stillsContainer.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1/-1;">No additional stills available for this project</p>';
+                return;
+            }
+            
+            stillsToShow.forEach((stillSrc, index) => {
+                const stillItem = document.createElement('div');
+                stillItem.className = 'still-item';
+                
+                const img = document.createElement('img');
+                img.src = stillSrc;
+                img.alt = `Film Still ${index + 1}`;
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
+                
+                img.onload = function() {
+                    this.style.opacity = '1';
+                };
+                
+                img.onerror = function() {
+                    console.error('Failed to load image:', stillSrc);
+                    stillItem.innerHTML = '<div style="padding: 40px; text-align: center; color: #999; background: #f5f5f5; border-radius: 4px; min-height: 300px; display: flex; align-items: center; justify-content: center;">Image not available</div>';
+                };
+                
+                stillItem.appendChild(img);
+                
+                stillItem.addEventListener('click', () => {
+                    // Use all stills for modal navigation
+                    openImageModal(stills, hasVideo ? index : index + 1);
+                });
+                
+                stillsContainer.appendChild(stillItem);
+            });
+        }
+
+        function initializeImageModal() {
+            const modal = document.getElementById('imageModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            
+            modalClose.addEventListener('click', closeImageModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
+                    closeImageModal();
+                }
+            });
+            
+            modalPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateModal(-1);
+            });
+            
+            modalNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateModal(1);
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('active')) {
+                    switch(e.key) {
+                        case 'Escape':
+                            closeImageModal();
+                            break;
+                        case 'ArrowLeft':
+                            navigateModal(-1);
+                            break;
+                        case 'ArrowRight':
+                            navigateModal(1);
+                            break;
+                    }
+                }
+            });
+        }
+
+        function openImageModal(images, startIndex = 0) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            currentImages = images;
+            currentImageIndex = startIndex;
+            
+            modalImage.src = currentImages[currentImageIndex];
+            modalCaption.textContent = `Still ${currentImageIndex + 1} of ${currentImages.length}`;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            updateModalNavigation();
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentImages = [];
+            currentImageIndex = 0;
+        }
+
+        function navigateModal(direction) {
+            if (currentImages.length === 0) return;
+            
+            currentImageIndex += direction;
+            
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentImages.length - 1;
+            } else if (currentImageIndex >= currentImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modalImage.src = currentImages[currentImageIndex];
+            modalCaption.textContent = `Still ${currentImageIndex + 1} of ${currentImages.length}`;
+            
+            updateModalNavigation();
+        }
+
+        function updateModalNavigation() {
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            
+            if (currentImages.length <= 1) {
+                modalPrev.style.display = 'none';
+                modalNext.style.display = 'none';
+            } else {
+                modalPrev.style.display = 'block';
+                modalNext.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
