@@ -185,20 +185,34 @@
                 videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
                 videoSection.style.display = 'block';
             }
-            // Check if there's a Vimeo video
-            else if (filmData.vimeoId) {
-                videoContainer.innerHTML = `
-                    <iframe 
-                        src="https://player.vimeo.com/video/${filmData.vimeoId}?byline=0&portrait=0" 
-                        frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture" 
-                        allowfullscreen
-                        title="${filmData.title} - Video">
-                    </iframe>
-                `;
-                videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
-                videoSection.style.display = 'block';
-            }
+           // Check if there's a Vimeo video
+else if (filmData.vimeoId) {
+    videoContainer.innerHTML = `
+        <iframe 
+            src="https://player.vimeo.com/video/${filmData.vimeoId}?byline=0&portrait=0" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture" 
+            allowfullscreen
+            title="${filmData.title} - Video">
+        </iframe>
+    `;
+    videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
+    videoSection.style.display = 'block';
+}
+// Check for a full Vimeo embed URL
+else if (filmData.vimeoEmbedUrl) {
+    videoContainer.innerHTML = `
+        <iframe 
+            src="${filmData.vimeoEmbedUrl}" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            allowfullscreen
+            title="${filmData.title} - Video">
+        </iframe>
+    `;
+    videoContainer.style.aspectRatio = '16 / 9'; // Set back to 16:9 for videos
+    videoSection.style.display = 'block';
+}
             // Check if there's a featured still image
             else if (filmData.stills && filmData.stills.length > 0) {
                 const featuredImageSrc = filmData.stills[0];
@@ -269,30 +283,19 @@
                 const img = document.createElement('img');
                 img.src = stillSrc;
                 img.alt = `Film Still ${index + 1}`;
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 0.3s ease';
                 
-                // Set up a promise to get the image dimensions
-                const imagePromise = new Promise((resolve, reject) => {
-                    const tempImage = new Image();
-                    tempImage.onload = () => resolve({ width: tempImage.naturalWidth, height: tempImage.naturalHeight });
-                    tempImage.onerror = reject;
-                    tempImage.src = stillSrc;
-                });
+                img.onload = function() {
+                    this.style.opacity = '1';
+                };
                 
-                imagePromise.then(({ width, height }) => {
-                    // Set the aspect ratio based on the image's dimensions
-                    stillItem.style.aspectRatio = `${width} / ${height}`;
-                    
-                    // Append the image after the aspect ratio is set
-                    stillItem.appendChild(img);
-                    img.style.opacity = '0';
-                    img.style.transition = 'opacity 0.3s ease';
-                    img.onload = () => {
-                        img.style.opacity = '1';
-                    };
-                }).catch(() => {
+                img.onerror = function() {
                     console.error('Failed to load image:', stillSrc);
                     stillItem.innerHTML = '<div style="padding: 40px; text-align: center; color: #999; background: #f5f5f5; border-radius: 4px; min-height: 300px; display: flex; align-items: center; justify-content: center;">Image not available</div>';
-                });
+                };
+                
+                stillItem.appendChild(img);
                 
                 stillItem.addEventListener('click', () => {
                     // Use all stills for modal navigation
