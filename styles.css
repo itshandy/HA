@@ -172,8 +172,8 @@ body.white-bg {
 }
 
 .film-image {
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
     flex-shrink: 0;
@@ -810,6 +810,7 @@ body.white-bg {
 }
 
 .still-item img {
+    /* THIS IS THE KEY FIX */
     width: 100%;
     height: auto;
     display: block;
