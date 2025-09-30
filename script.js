@@ -55,7 +55,19 @@ const FILM_DATA = {
             'assets/open-house-5.jpg',
             'assets/open-house-6.jpg',
             'assets/open-house-7.jpg',
-            'assets/open-house-8.jpg'
+            'assets/open-house-8.jpg',
+            'assets/open-house-9.jpg',
+            'assets/open-house-10.jpg',
+            'assets/open-house-11.jpg',
+            'assets/open-house-12.jpg',
+            'assets/open-house-13.jpg',
+            'assets/open-house-14.jpg',
+            'assets/open-house-15.jpg',
+            'assets/open-house-16.jpg',
+            'assets/open-house-17.jpg',
+            'assets/open-house-18.jpg',
+            'assets/open-house-19.jpg',
+            'assets/open-house-20.jpg',
         ]
     },
     'speak-less': {
@@ -86,7 +98,7 @@ const FILM_DATA = {
         type: 'TV Pilot (Sitcom)',
         year: '2024',
         duration: '30 min',
-        youtubeId: 'o-YBDTqX_tQ', // Replaced placeholder ID
+        youtubeId: 'KyaBhRSk1f8', 
         credits: {
             'Director': 'Jay Mandyam',
             'Production Company': 'Television Academy Foundation',
@@ -146,7 +158,9 @@ const FILM_DATA = {
             'assets/dead-pet-shark-5.jpg',
             'assets/dead-pet-shark-6.jpg',
             'assets/dead-pet-shark-7.jpg',
-            'assets/dead-pet-shark-8.jpg'
+            'assets/dead-pet-shark-8.jpg',
+            'assets/dead-pet-shark-9.jpg',
+            'assets/dead-pet-shark-10.jpg'
         ]
     },
     'counterfeit': {
@@ -223,7 +237,7 @@ const FILM_DATA = {
         type: 'Short Film',
         year: '2023',
         duration: '14 min',
-        vimeoId: '908437591',
+      vimeoEmbedUrl: 'https://player.vimeo.com/video/947157303?h=efc4e7c99d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479',
         credits: {
             'Director': 'Ben Grimes',
             'Festival': 'LA Shorts International',
@@ -245,7 +259,7 @@ const FILM_DATA = {
         type: 'Short Film',
         year: '2023',
         duration: '18 min',
-        vimeoId: '896702263',
+        vimeoEmbedUrl: 'https://player.vimeo.com/video/896702263?h=196f0aa525&badge=0&autopause=0&player_id=0&app_id=58479',
         credits: {
             'Director': 'Aakash Tumuluri',
             'Network': 'PBS',
