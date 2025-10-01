@@ -35,7 +35,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // - video: null or omit for stills-only projects
 const FILM_DATA = {
     'open-house': {
-        title: 'Open House',
+        title: 'OPEN HOUSE',
         type: 'Feature Film',
         year: '2025',
         duration: '102 min',
@@ -71,7 +71,7 @@ const FILM_DATA = {
         ]
     },
     'speak-less': {
-        title: 'Speak Less',
+        title: 'SPEAK LESS',
         type: 'Feature Film',
         year: '2024',
         duration: '95 min',
@@ -94,7 +94,7 @@ const FILM_DATA = {
         ]
     },
     'failure-to-launch': {
-        title: 'Failure to Launch',
+        title: 'FAILURE TO LAUNCH',
         type: 'TV Pilot (Sitcom)',
         year: '2024',
         duration: '30 min',
@@ -116,7 +116,7 @@ const FILM_DATA = {
         ]
     },
     'top-voices': {
-        title: 'Top Voices',
+        title: 'TOP VOICES',
         type: 'TV Pilot (Drama)',
         year: '2024',
         duration: '45 min',
@@ -135,15 +135,17 @@ const FILM_DATA = {
             'assets/top-voices-5.jpg',
             'assets/top-voices-6.jpg',
             'assets/top-voices-7.jpg',
-            'assets/top-voices-8.jpg'
+            'assets/top-voices-8.jpg',
+            'assets/top-voices-9.jpg',
+            'assets/top-voices-10.jpg'
         ]
     },
     'dead-pet-shark': {
-        title: 'Dead Pet Shark',
+        title: 'DEAD PET SHARK',
         type: 'Short Film (35mm)',
         year: '2024',
         duration: '15 min',
-        vimeoId: null,
+        video: null,
         credits: {
             'Director': 'Misha Gankin',
             'Festival': 'Dances with Film NYC, Kodak Feature',
@@ -164,7 +166,7 @@ const FILM_DATA = {
         ]
     },
     'counterfeit': {
-        title: 'Counterfeit',
+        title: 'COUNTERFEIT',
         type: 'Short Film',
         year: '2024',
         duration: '12 min',
@@ -187,7 +189,7 @@ const FILM_DATA = {
         ]
     },
     'un-paso-mas': {
-        title: 'Un Paso Mas',
+        title: 'UN PASO MAS',
         type: 'Short Film',
         year: '2024',
         duration: '10 min',
@@ -210,7 +212,7 @@ const FILM_DATA = {
         ]
     },
     'i-am-a-piece-of-shit': {
-        title: 'I Am A Piece of Shit',
+        title: 'I AM A PIECE OF SHIT',
         type: 'Short Film',
         year: '2024',
         duration: '8 min',
@@ -224,16 +226,16 @@ const FILM_DATA = {
             'assets/piece-of-shit-main.jpg',
             'assets/piece-of-shit-1.jpg',
             'assets/piece-of-shit-2.jpg',
-            'assets/piece-of-shit-3.jpg',
-            'assets/piece-of-shit-4.jpg',
             'assets/piece-of-shit-5.jpg',
             'assets/piece-of-shit-6.jpg',
             'assets/piece-of-shit-7.jpg',
-            'assets/piece-of-shit-8.jpg'
+            'assets/piece-of-shit-8.jpg',
+            'assets/piece-of-shit-11.jpg',
+            'assets/piece-of-shit-12.jpg'
         ]
     },
     'scratch-and-sniff': {
-        title: 'Scratch & Sniff',
+        title: 'SCRATCH & SNIFF',
         type: 'Short Film',
         year: '2023',
         duration: '14 min',
@@ -255,7 +257,7 @@ const FILM_DATA = {
         ]
     },
     'califoreclosed': {
-        title: 'Califoreclosed',
+        title: 'CALIFORECLOSED',
         type: 'Short Film',
         year: '2023',
         duration: '18 min',
@@ -273,34 +275,12 @@ const FILM_DATA = {
             'assets/califoreclosed-5.jpg',
             'assets/califoreclosed-6.jpg',
             'assets/califoreclosed-7.jpg',
-            'assets/califoreclosed-8.jpg'
-        ]
-    },
-    'the-day-we-met': {
-        title: 'The Day We Met',
-        type: 'Short Film',
-        year: '2023',
-        duration: '11 min',
-        video: null,
-        credits: {
-            'Director': 'Stephanie Jones',
-            'Production': 'Independent',
-            'Cinematographer': 'Harnish Ambaliya'
-        },
-        stills: [
-            'assets/day-we-met-main.jpg',
-            'assets/day-we-met-1.jpg',
-            'assets/day-we-met-2.jpg',
-            'assets/day-we-met-3.jpg',
-            'assets/day-we-met-4.jpg',
-            'assets/day-we-met-5.jpg',
-            'assets/day-we-met-6.jpg',
-            'assets/day-we-met-7.jpg',
-            'assets/day-we-met-8.jpg'
+            'assets/califoreclosed-8.jpg',
+            'assets/califoreclosed-9.jpg'
         ]
     },
     'inch-by-inch': {
-        title: 'Inch by Inch',
+        title: 'INCH BY INCH',
         type: 'Short Film',
         year: '2023',
         duration: '9 min',
@@ -323,7 +303,7 @@ const FILM_DATA = {
         ]
     },
     'if-you-see-me': {
-        title: 'If You See Me',
+        title: 'IF YOU SEE ME',
         type: 'Short Film',
         year: '2023',
         duration: '13 min',
@@ -345,8 +325,23 @@ const FILM_DATA = {
             'assets/if-you-see-me-8.jpg'
         ]
     },
+    'rr-kabel': {
+        title: 'FIREX LAUNCH FILM',
+        type: 'Commercial',
+        year: '2024',
+        duration: '1 min',
+        video: null,
+        credits: {
+            'Brand': 'RR Kabel',
+            'Production': 'Vertuals',
+            'Cinematographer': 'Harnish Ambaliya'
+        },
+        stills: [
+            'assets/rr-kabel-1.jpg',
+        ]
+    },
     'bond-of-togetherness': {
-        title: '#BondOfTogetherness',
+        title: '#BONDOFTOGETHERNESS',
         type: 'Commercial',
         year: '2024',
         duration: '1.5 min',
@@ -368,7 +363,7 @@ const FILM_DATA = {
         ]
     },
     'fsw-lamba-challega': {
-        title: 'FSW Lamba Challega',
+        title: 'FSW LAMBA CHALLEGA',
         type: 'Commercial',
         year: '2024',
         duration: '2 min',
@@ -390,7 +385,7 @@ const FILM_DATA = {
         ]
     },
     'utha-utha-sakalik': {
-        title: 'Utha Utha Sakalik',
+        title: 'UTHA UTHA SAKALIK',
         type: 'Music Video',
         year: '2024',
         duration: '4 min',
@@ -412,7 +407,7 @@ const FILM_DATA = {
         ]
     },
     'mera-hai-dil': {
-        title: 'Mera Hai Dil',
+        title: 'MERA HAI DIL',
         type: 'Music Video',
         year: '2024',
         duration: '4 min',
@@ -434,7 +429,7 @@ const FILM_DATA = {
         ]
     },
     'ishq-toh-nahi': {
-        title: 'Ishq Toh Nahi',
+        title: 'ISHQ TOH NAHI',
         type: 'Music Video',
         year: '2024',
         duration: '4 min',
@@ -456,7 +451,7 @@ const FILM_DATA = {
         ]
     },
     'mumbai-anthem': {
-        title: 'Mumbai Anthem',
+        title: 'MUMBAI ANTHEM',
         type: 'Music Video',
         year: '2024',
         duration: '4 min',
@@ -486,6 +481,13 @@ function initPortfolioFiltering() {
     
     if (filterLinks.length === 0 || filmStrips.length === 0) return;
     
+    // Define projects that should be hidden from the "All Work" view
+    const hiddenProjects = [
+        'speak-less', 'if-you-see-me', 'rr-kabel', 'utha-utha-sakalik',
+        'mera-hai-dil', 'bond-of-togetherness', 'fsw-lamba-challega',
+        'mumbai-anthem', 'un-paso-mas', 'counterfeit', 'inch-by-inch'
+    ];
+
     // Handle hash navigation from URL
     const hash = window.location.hash.substring(1);
     if (hash && ['feature', 'tv', 'short', 'commercial'].includes(hash)) {
@@ -514,8 +516,23 @@ function initPortfolioFiltering() {
             
             filmStrips.forEach((strip, index) => {
                 const category = strip.getAttribute('data-category');
+                const filmId = strip.getAttribute('data-film');
                 
-                if (filter === 'all' || category === filter) {
+                // Show strip if the category matches the filter
+                // AND if the filter is 'all', check if the film should be hidden
+                if (filter === 'all') {
+                    if (!hiddenProjects.includes(filmId)) {
+                        strip.style.display = 'block';
+                        strip.style.opacity = '0';
+                        strip.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            strip.style.opacity = '1';
+                            strip.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    } else {
+                        strip.style.display = 'none';
+                    }
+                } else if (category === filter) {
                     strip.style.display = 'block';
                     strip.style.opacity = '0';
                     strip.style.transform = 'translateY(20px)';
@@ -581,14 +598,12 @@ document.addEventListener('DOMContentLoaded', () => {
         strip.addEventListener('click', function() {
             handleFilmClick(this);
         });
+    });
 
-        strip.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-
-        strip.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
+    // Manually trigger animation for the first few elements on initial load
+    const initialElements = document.querySelectorAll('.film-strip:nth-child(-n+4)');
+    initialElements.forEach(el => {
+        el.classList.add('visible');
     });
 });
 
