@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="filmTitle">Film - Harnish Ambaliya</title>
+
+    <meta name="description" content="Harnish Ambaliya is a Los Angeles-based Director of Photography and producer, known for his narrative and commercial work.">
+    <meta name="keywords" content="Harnish Ambaliya, cinematographer, director of photography, DP, film, Los Angeles, feature films, short films, commercials, music videos, USC">
+    <meta name="author" content="Harnish Ambaliya">
+
+    <meta property="og:title" content="Harnish Ambaliya - Director of Photography">
+    <meta property="og:description" content="Award-winning cinematographer and producer based in Los Angeles.">
+    <meta property="og:image" content="assets/social-share-image.jpg">
+    <meta property="og:url" content="https://harnishambaliya.com">
+
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body class="white-bg film-page">
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">
-    <span class="logo-name">Harnish Ambaliya</span> 
-    | 
-    <span class="logo-title">Director of Photography</span>
-</a>
+                <span class="logo-name">HARNISH AMBALIYA</span>  
+                <span class="logo-title">Director of Photography</span>
+            </a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">All Work</a></li>
                 <li><a href="index.html#feature" class="nav-link">Feature Films</a></li>
@@ -22,6 +33,7 @@
                 <li><a href="index.html#short" class="nav-link">Short Films</a></li>
                 <li><a href="index.html#commercial" class="nav-link">MV/Commercials</a></li>
                 <li><a href="about.html" class="nav-link">About Me</a></li>
+                <li><a href="press.html" class="nav-link">Press</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -152,7 +164,7 @@
         function updateFilmPage(filmData) {
             // Update page title and header
             document.getElementById('filmTitle').textContent = `${filmData.title} - Harnish Ambaliya`;
-            document.getElementById('filmName').textContent = filmData.title;
+            document.getElementById('filmName').textContent = filmData.title.toUpperCase(); // Force uppercase
             document.getElementById('filmType').textContent = filmData.type || 'Film';
             document.getElementById('filmYear').textContent = filmData.year || '2024';
             document.getElementById('filmDuration').textContent = filmData.duration || 'N/A';
@@ -268,7 +280,7 @@ else if (filmData.vimeoEmbedUrl) {
             const filmData = getFilmData(filmId);
             
             // If no video, skip the first image (it's shown as featured)
-            const hasVideo = (filmData.youtubeId && filmData.youtubeId !== 'YOUR_YOUTUBE_ID') || filmData.vimeoId;
+            const hasVideo = (filmData.youtubeId && filmData.youtubeId !== 'YOUR_YOUTUBE_ID') || filmData.vimeoId || filmData.vimeoEmbedUrl;
             const stillsToShow = hasVideo ? stills : stills.slice(1);
             
             if (stillsToShow.length === 0) {
