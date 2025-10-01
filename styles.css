@@ -6,26 +6,34 @@
 }
 
 body {
-    font-family: 'Overpass Mono', monospace;
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
     color: #333;
     background-color: #000;
-    overflow-x: hidden;
     font-weight: 300;
     letter-spacing: 0.3px;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Overpass Mono', monospace;
-    font-weight: 300;
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.film-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
     line-height: 1.2;
     letter-spacing: 0.5px;
 }
 
-.section-title {
-    font-family: 'Overpass Mono', monospace;
+.signature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
     font-weight: 300;
+    letter-spacing: 0.1rem;
+    text-transform: none;
+    line-height: 1;
+}
+
+.section-title {
     font-size: 2.5rem;
     letter-spacing: 1px;
     margin-bottom: 3rem;
@@ -69,17 +77,26 @@ body.white-bg {
     color: #333;
     text-decoration: none;
     letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .logo-name {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
 }
 
 .logo-title {
-    font-size: 0.8rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.75rem;
     font-weight: 400;
     color: #666;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
 }
 
 .nav-menu {
@@ -95,6 +112,7 @@ body.white-bg {
     font-size: 0.95rem;
     transition: color 0.3s ease;
     position: relative;
+    font-family: 'Poppins', sans-serif;
 }
 
 .nav-link:hover {
@@ -145,81 +163,89 @@ body.white-bg {
 
 .film-strip {
     width: 100%;
-    height: 400px;
-    margin-bottom: 20px;
+    height: auto;
+    margin-bottom: 0;
     cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     background: #f8f9fa;
     user-select: none;
-    border-radius: 8px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .film-strip:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transform: none;
+    box-shadow: none;
 }
 
 .film-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
     overflow: hidden;
-    display: flex;
+    display: block;
     pointer-events: none;
 }
 
 .film-image {
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: none;
     flex-shrink: 0;
     pointer-events: none;
+    vertical-align: middle;
 }
 
 .film-strip:hover .film-image {
-    transform: scale(1.05);
+    transform: none;
 }
 
+/* Position and style the text block */
 .film-info {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
     color: #fff;
-    padding: 40px 30px 20px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    pointer-events: none;
+    z-index: 2;
+    padding: 20px 30px;
+    background: transparent;
 }
 
-.film-strip:hover .film-info {
-    transform: translateY(0);
+/* Add hover effect only to the text with a subtle black glow */
+.film-info h3,
+.film-info p {
+    transition: text-shadow 0.3s ease;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.film-info:hover h3,
+.film-info:hover p {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
 .film-info h3 {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 400;
     margin-bottom: 8px;
     letter-spacing: 1px;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
 }
 
 .film-info p {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-bottom: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0;
 }
 
-.film-duration {
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 4px 12px;
-    border-radius: 4px;
-    display: inline-block;
+/* No overlay from hover effect */
+.film-strip::before {
+    content: none;
 }
 
 /* About Page Styles */
@@ -253,7 +279,7 @@ body.white-bg {
     content: '"';
     font-size: 2rem;
     color: #ccc;
-    font-family: serif;
+    font-family: 'Playfair Display', serif;
 }
 
 .about-story-section {
@@ -261,228 +287,124 @@ body.white-bg {
     background: #fff;
 }
 
-.about-story-section .about-content {
+/* Updated for single-column layout */
+.about-story-section .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 80px;
 }
 
-
-.story-intro {
-    font-size: 1.2rem !important;
-    font-weight: 400;
-    color: #333 !important;
-    margin-bottom: 30px !important;
-    line-height: 1.7;
-}
-
-.about-text p {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    color: #555;
-}
-
-.about-text em {
-    font-style: italic;
-    color: #333;
-}
-
-.career-highlights {
-    margin: 60px 0;
-}
-
-.career-highlights h3 {
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-.highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    margin-bottom: 40px;
-}
-
-.highlight-item {
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 8px;
-    border-left: 3px solid #007bff;
-}
-
-.highlight-item h4 {
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.highlight-item p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
-}
-
-.skills {
-    margin-top: 60px;
-}
-
-.skills h3 {
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 30px;
-}
-
-.skill-item {
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 8px;
-    border-left: 3px solid #333;
-}
-
-.skill-item h4 {
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.skill-item p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
-}
-
-.equipment {
-    margin-top: 60px;
-}
-
-.equipment h3 {
-    color: #333;
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-.equipment-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.equipment-category h4 {
-    color: #333;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
-}
-
-.equipment-category ul {
-    list-style: none;
-}
-
-.equipment-category li {
-    color: #666;
-    padding: 5px 0;
-    font-size: 0.9rem;
-}
-
-.about-image-section {
-    position: sticky;
-    top: 120px;
-    flex: 1;
-}
-
-.about-image {
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.about-image img {
+/* New: Style for the 16x9 hero image */
+.about-image-hero {
     width: 100%;
-    max-width: 350px;
-    border-radius: 8px;
+    max-width: 1200px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.image-caption {
-    margin-top: 15px;
+.about-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.image-caption p {
-    color: #999;
-    font-size: 0.9rem;
-    font-style: italic;
-    margin: 0;
+/* New: Wrapper for the single-column content below the image */
+.about-content-single {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Changed to flex-start */
+    max-width: 1000px; /* Increased max-width for wider paragraphs */
+    width: 100%;
 }
 
+.about-text {
+    width: 100%;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    color: #666;
+}
+
+/* New minimalistic contact card */
 .contact-card {
-    background: #f8f9fa;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
+    background: none;
+    padding: 0;
+    border: none;
+    text-align: left;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 40px; /* Add space between text and contact card */
 }
 
 .contact-card h3 {
-    color: #333;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 15px;
+    color: #1a1a1a;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    text-align: left;
 }
 
-.contact-card > p {
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-details p, .contact-details a {
     color: #666;
-    margin-bottom: 25px;
+    margin-bottom: 0;
     font-size: 0.95rem;
-}
-
-.contact-details p {
-    color: #666;
-    margin-bottom: 12px;
-    font-size: 0.9rem;
-}
-
-.contact-details a {
-    color: #007bff;
     text-decoration: none;
 }
 
+.contact-details strong {
+    color: #333;
+    font-weight: 500;
+}
+
 .contact-details a:hover {
+    color: #000;
     text-decoration: underline;
 }
 
 .social-links {
-    margin-top: 25px;
+    margin-top: 30px;
     display: flex;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 25px;
 }
 
 .social-links a {
     color: #666;
-    text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .social-links a:hover {
     color: #333;
+}
+/* Social media icons */
+.social-links img {
+    width: 24px;
+    height: 24px;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.social-links a:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
 /* Contact form styles (for existing contact page) */
@@ -569,7 +491,7 @@ body.white-bg {
     border-radius: 4px;
     color: #333;
     font-size: 0.9rem;
-    font-family: 'Overpass Mono', monospace;
+    font-family: 'Lato', sans-serif;
     transition: border-color 0.3s ease;
 }
 
@@ -597,7 +519,7 @@ body.white-bg {
     border: none;
     cursor: pointer;
     font-size: 0.95rem;
-    font-family: 'Overpass Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-family: 'Lato', sans-serif;
 }
 
 .btn-primary:hover {
@@ -654,17 +576,17 @@ body.white-bg {
 }
 
 .film-title {
-    font-family: 'Overpass Mono', monospace;
     font-size: 4rem;
     font-weight: 300;
     color: #1a1a1a;
     margin-bottom: 20px;
     letter-spacing: 1px;
     line-height: 1.1;
+    text-transform: uppercase;
 }
 
 .film-meta {
-    font-family: 'Overpass Mono', monospace;
+    font-family: 'Lato', sans-serif;
     font-size: 1rem;
     color: #666;
     font-weight: 400;
@@ -725,7 +647,6 @@ body.white-bg {
 }
 
 .detail-title {
-    font-family: 'Overpass Mono', monospace;
     font-size: 2rem;
     font-weight: 300;
     color: #1a1a1a;
@@ -734,7 +655,6 @@ body.white-bg {
 }
 
 .detail-subtitle {
-    font-family: 'Overpass Mono', monospace;
     font-size: 1.4rem;
     font-weight: 400;
     color: #1a1a1a;
@@ -743,7 +663,7 @@ body.white-bg {
 }
 
 .detail-text {
-    font-family: 'Overpass Mono', monospace;
+    font-family: 'Lato', sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
     color: #4a4a4a;
@@ -752,7 +672,7 @@ body.white-bg {
 }
 
 .detail-list {
-    font-family: 'Overpass Mono', monospace;
+    font-family: 'Lato', sans-serif;
 }
 
 .detail-list > div {
@@ -933,7 +853,7 @@ body.white-bg {
     .hamburger {
         display: flex;
     }
-    
+
     .nav-menu {
         position: fixed;
         left: -100%;
@@ -947,150 +867,148 @@ body.white-bg {
         padding: 30px 0;
         border-bottom: 1px solid #e0e0e0;
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-menu li {
         margin: 10px 0;
     }
-    
+
     .nav-logo {
         font-size: 1rem;
     }
-    
+
     .nav-container {
         padding: 0 20px;
     }
-    
+
     /* Film page responsive styles */
     .film-container {
         padding: 0 20px;
     }
-    
+
     .film-title {
         font-size: 2.5rem;
         margin-bottom: 15px;
     }
-    
+
     .film-meta {
         font-size: 0.9rem;
     }
-    
+
     .meta-separator {
         margin: 0 10px;
     }
-    
+
     .film-details-grid {
         grid-template-columns: 1fr;
         gap: 50px;
     }
-    
+
     .detail-title {
         font-size: 1.5rem;
         margin-bottom: 20px;
     }
-    
+
     .detail-subtitle {
         font-size: 1.2rem;
         margin-bottom: 15px;
     }
-    
+
     .detail-text {
         font-size: 1rem;
         line-height: 1.7;
     }
-    
+
+    /* Force single column and proper image sizing for mobile stills grid */
     .stills-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 5px; /* NEW VALUE */
     }
-    
+
+    .still-item img {
+        width: 100%;
+        height: auto;
+    }
+
     .section-title {
         font-size: 2rem;
         margin-bottom: 2rem;
     }
-    
+
     /* Modal responsive */
     .modal-backdrop {
         padding: 20px;
     }
-    
+
     .modal-close {
         top: -50px;
         font-size: 30px;
     }
-    
+
     .modal-nav-btn {
         font-size: 24px;
         padding: 10px 15px;
     }
-    
+
     /* Portfolio responsive (existing) */
     .film-strip {
-        height: 300px;
-        margin-bottom: 30px;
+        height: auto;
+        margin-bottom: 0;
     }
-    
+
     .film-frame {
         flex-direction: column;
     }
-    
+
     .film-image {
         width: 100%;
-        height: 50%;
+        height: auto;
     }
-    
-    .film-info {
-        position: static;
-        transform: none;
-        background: rgba(0, 0, 0, 0.9);
-        padding: 20px;
-    }
-    
+
+    /* UPDATED: Adjust font size for film info on mobile */
     .film-info h3 {
         font-size: 1.4rem;
     }
-    
+
     .film-info p {
         font-size: 0.9rem;
     }
-    
+
     .about-hero-content h1 {
         font-size: 2rem;
     }
-    
+
     .hero-quote {
         font-size: 1.1rem;
     }
-    
-    .about-story-section .about-content {
-        display: flex;
+
+    .about-story-section .container {
         flex-direction: column;
         align-items: center;
         gap: 40px;
     }
 
-    /* NEW: This rule changes the two-column layout to a single column on mobile */
     .about-content {
         flex-direction: column;
         gap: 40px;
     }
-    
+
     .highlights-grid,
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .equipment-list {
         grid-template-columns: 1fr;
     }
-    
+
     .about-image-section {
         position: static;
     }
-    
+
     .page-header h1 {
         font-size: 2rem;
     }
@@ -1100,54 +1018,63 @@ body.white-bg {
     .container, .film-container {
         padding: 0 15px;
     }
-    
+
     .portfolio-section {
         padding: 80px 0 40px;
     }
-    
+
     .about-hero-section {
         padding: 100px 0 40px;
     }
-    
+
     .about-story-section {
         padding: 60px 0;
     }
-    
+
     .nav-container {
         padding: 0 15px;
     }
-    
+
     .nav-logo {
         font-size: 0.9rem;
     }
-    
+
     /* Film page mobile optimizations */
     .film-title {
         font-size: 2rem;
         line-height: 1.2;
     }
-    
+
     .film-hero {
         padding: 60px 0 40px;
     }
-    
+
     .film-video-section {
         padding: 0 0 60px;
     }
-    
+
     .film-details-section,
     .film-stills-section {
         padding: 60px 0;
     }
-    
+
     .detail-block {
         margin-bottom: 40px;
     }
-    
+
     .stills-grid {
-        gap: 15px;
+        gap: 2px; /* NEW VALUE */
     }
-    
+
+    /* More specific rule for portfolio text on very small screens */
+    .film-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .film-info p {
+        font-size: 0.65rem;
+    }
+
     .modal-caption {
         font-size: 0.8rem;
         margin-top: 15px;
@@ -1193,3 +1120,85 @@ body.white-bg {
 .still-item img[loading="lazy"].loaded {
     opacity: 1;
 }
+<<<<<<< HEAD
+/* --- FIXES FOR MOBILE ISSUES --- */
+
+/* Smaller text overlay on very small screens */
+@media (max-width: 480px) {
+    .film-info {
+        width: 95%;
+        padding: 5px;
+    }
+
+    .film-info h3 {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+
+    .film-info p {
+        font-size: 0.65rem;
+    }
+}
+
+/* Prevent still images from squeezing, no gray letterbox */
+.still-item {
+    background: transparent;
+}
+
+.still-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Styles for the new Press page */
+.press-main {
+    padding-top: 70px;
+}
+
+.press-list-section {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.press-item {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 25px;
+}
+
+.press-item a {
+    text-decoration: none;
+}
+
+.press-item h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    transition: color 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.press-item a:hover h3 {
+    color: #007bff;
+}
+
+.press-source {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.press-description {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+=======
+>>>>>>> 5455c166a2116d7dfcf9904e53390344895f9dbf
